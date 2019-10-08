@@ -7,6 +7,7 @@ public class Car {
 
     private String make;
     private String model;
+    private String color;
     private int year;
 
     public Car(String make, String model, int year) {
@@ -14,6 +15,16 @@ public class Car {
         this.make = make;
         this.model = model;
         this.year = year;
+    }
+
+    public String getColor() {
+
+        return color;
+    }
+
+    public void setColor(String color) {
+
+        this.color = color;
     }
 
     @Override
