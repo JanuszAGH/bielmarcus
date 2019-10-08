@@ -1,9 +1,6 @@
 package pl.janusz.lesson2;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.mockito.Mockito;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
@@ -12,6 +9,18 @@ import static org.hamcrest.Matchers.*;
  * Created by Janusz Kacki on 08/10/2019. Project; bielmarcus
  */
 public class PersonTest {
+
+    @Test
+    public void shouldReturnMarcus() {
+
+        Person person = new Person();
+        String name = "Marcus";
+
+        String result = person.hello(name);
+
+        String hellomarcus = "Hello " + name;
+        assertThat(result, is(equalTo(hellomarcus)));
+    }
 
     @Test
     public void shouldReturnHelloWord() {
