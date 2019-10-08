@@ -10,39 +10,45 @@ import org.mockito.Mockito;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by Janusz Kacki on 08/10/2019. Project; bielmarcus
- */
+@RunWith(Parameterized.class)
 public class MyClassTest {
 
-    private IStudent student;
-    private String sAName;
-    private String sBName;
-    private String sASurname;
-    private String sBSurname;
-    private IStudent studentA;
-    private IStudent studentB;
+    @Parameterized.Parameter(value = 0)
+    public static String name;
+    @Parameterized.Parameter(value = 1)
+    public static String surname;
+    @Parameterized.Parameter(value = 2)
+    public static IStudent student;
+
+    private static String sAName = "Adam";
+    private static String sBName = "Barbara";
+    private static String sASurname = "Ant";
+    private static String sBSurname = "Brown";
+    private static IStudent studentA = Mockito.mock(IStudent.class);
+    private static IStudent studentB = Mockito.mock(IStudent.class);
+
     private MyClass sut;
     private ICreateStudent createStudent;
+
+    @Parameterized.Parameters
+    public static Collection<Object[]> data() {
+
+        return Arrays.asList(new Object[][]{
+                {sAName, sASurname, studentA},
+                {sBName, sBSurname, studentB}
+        });
+    }
 
     @Before
     public void setUp() throws Exception {
 
         createStudent = Mockito.mock(ICreateStudent.class);
-        studentA = Mockito.mock(IStudent.class);
-        studentB = Mockito.mock(IStudent.class);
 
         List<IStudent> students = Arrays.asList(studentA, studentB);
-
-        sAName = "Adam";
-        sBName = "Barbara";
-        sASurname = "Ant";
-        sBSurname = "Brown";
 
         Mockito
                 .when(studentA.getName())
@@ -67,12 +73,20 @@ public class MyClassTest {
     }
 
     @Test
-    public void mocksAreNotNullAsInstances() {
+    public void shouldDoFindingByName() {
 
-        assertThat(studentA, is(not(equalTo(null))));
-        assertThat(studentB, is(not(equalTo(null))));
+        IStudent byName = sut.findByName(name);
+        assertThat(byName.getName(), is(equalTo(student.getName())));
     }
 
+    @Test
+    public void shouldfindingBySurname() {
+
+        IStudent bySurname = sut.findBySurname(surname);
+        assertThat(bySurname.getSurname(), is(equalTo(student.getSurname())));
+    }
+
+    @Ignore
     @Test
     public void shouldCreateStudents() {
 
@@ -87,28 +101,18 @@ public class MyClassTest {
         assertThat(students.get(1).getName(), is(sBName));
         assertThat(students.get(0).getSurname(), is(sASurname));
         assertThat(students.get(1).getSurname(), is(sBSurname));
-    }
 
-    @Test
-    public void shouldFindByName() {
-
-        IStudent byName = sut.findByName(sAName);
-        assertThat(byName.getName(), is(equalTo(sAName)));
-    }
-
-    @Test
-    public void shouldFindBySurname() {
-
-        IStudent bySurname = sut.findBySurname(sASurname);
-        assertThat(bySurname.getSurname(),is(sASurname));
+        assertThat(studentA, is(not(equalTo(null))));
+        assertThat(studentB, is(not(equalTo(null))));
     }
 
     @Test
     public void shouldReturnNullWhenStudentDoesntExist() {
 
         IStudent byName = sut.findByName("Joe");
-        assertThat(byName,is(equalTo(null)));
+        assertThat(byName, is(equalTo(null)));
 
         IStudent bySurname = sut.findBySurname("Doe");
         assertThat(bySurname, is(equalTo(null)));
-    }}
+    }
+}

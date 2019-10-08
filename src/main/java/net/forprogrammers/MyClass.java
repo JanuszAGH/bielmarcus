@@ -3,9 +3,6 @@ package net.forprogrammers;
 import java.util.List;
 import java.util.function.Predicate;
 
-/**
- * Created by Janusz Kacki on 08/10/2019. Project; bielmarcus
- */
 public class MyClass implements IMyClass {
 
     private List<IStudent> students;
@@ -23,15 +20,6 @@ public class MyClass implements IMyClass {
         return getStudent(byName);
     }
 
-    private IStudent getStudent(Predicate<IStudent> byName) {
-
-        return this.students
-                .stream()
-                .filter(byName)
-                .findAny()
-                .orElse(null);
-    }
-
     @Override
     public IStudent findBySurname(String surname) {
 
@@ -44,5 +32,14 @@ public class MyClass implements IMyClass {
     public int count() {
 
         return students.size();
+    }
+
+    private IStudent getStudent(Predicate<IStudent> criterion) {
+
+        return this.students
+                .stream()
+                .filter(criterion)
+                .findAny()
+                .orElse(null);
     }
 }
