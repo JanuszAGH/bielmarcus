@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.*;
 /**
  * Created by Janusz Kacki on 08/10/2019. Project; bielmarcus
  */
-public class PersonTest {
+public class Pers
 
     @Test
     public void shouldReturnMarcus() {
