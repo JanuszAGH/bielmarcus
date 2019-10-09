@@ -28,18 +28,6 @@ public class PersonTest {
     }
 
     @Test
-    public void shouldReturnMarcus() {
-
-        Person person = new Person();
-        String name = "Marcus";
-
-        String result = person.hello(name);
-
-        String hellomarcus = "Hello " + name;
-        assertThat(result, is(equalTo(hellomarcus)));
-    }
-
-    @Test
     public void shouldReturnHelloWord() {
 
 //               given
