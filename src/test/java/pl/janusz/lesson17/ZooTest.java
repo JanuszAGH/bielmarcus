@@ -15,10 +15,7 @@ public class ZooTest {
     public void shouldfeedAllAnimals() {
 
         Zoo zoo = new Zoo();
-        Animal[] animals = new Animal[]{new Dog(), new Gorilla(), new Lion(),new Tiger()};
-
-        for (Animal animal : animals) {
-            animal.he
-        }
+        Animal[] animals = new Animal[]{new Dog(), new Gorilla(), new Lion(), new Tiger()};
+        
     }
 }
