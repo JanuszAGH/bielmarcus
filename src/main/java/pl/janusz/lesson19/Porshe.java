@@ -27,6 +27,26 @@ public class Porshe implements Cloneable {
         return result;
     }
 
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Porshe porshe = (Porshe) o;
+
+        if (!getOwner().equals(porshe.getOwner())) return false;
+        return getColor() != null ? getColor().equals(porshe.getColor()) : porshe.getColor() == null;
+    }
+
+    @Override
+    public int hashCode() {
+
+        int result = getOwner().hashCode();
+        result = 31 * result + (getColor() != null ? getColor().hashCode() : 0);
+        return result;
+    }
+
     public Color getColor() {
 
         return color;
