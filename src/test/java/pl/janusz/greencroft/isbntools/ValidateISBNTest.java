@@ -21,6 +21,24 @@ public class ValidateISBNTest {
     }
 
     @Test
+    public void shouldNotValidateWrong13DigitsISBN() {
+
+        String validISBN = "9781548801130";
+        boolean result = validator.checkISBN(validISBN);
+
+        assertThat(result, is(false));
+    }
+
+    @Test
+    public void shouldValidateSimple13DigitsISBN() {
+
+        String validISBN = "9781548801137";
+        boolean result = validator.checkISBN(validISBN);
+
+        assertThat(result, is(true));
+    }
+
+    @Test
     public void shouldCheckAnotherValidISBN() {
 
         String validISBN = "0140177396";
